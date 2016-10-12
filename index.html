@@ -1,0 +1,38 @@
+<!doctype html>
+<title>re:twitch</title>
+<style>
+ #stream_name {
+     padding: 5px;
+     height: 30px;
+     vertical-align: top;
+     box-sizing: border-box;
+ }
+
+ button {
+     background-color: rgb(110, 76, 171);
+     border: none;
+     color: white;
+     padding: 5px 10px;
+     text-align: center;
+     text-decoration: none;
+     display: inline-block;
+     height: 30px;
+     vertical-align: top;
+ }
+</style>
+<link rel="shortcut icon" type="image/x-icon" href="//cdn.discordapp.com/emojis/232913893251481601.png" />
+<body>
+  <h2 id="browser_warning">This page only works on modern Firefox and Chrome browser!</h2>
+  <form id="form" action="javascript:void(0)" onsubmit="Playa.loadStream()">
+    <label>
+      <input id="stream_name" type="text" placeholder="Stream" />
+    </label>
+    <button onclick="Playa.loadStream()">Load stream</button>
+  </form>
+  <br />
+  <span id="offline_warning" style="display:none">Offline BibleThump</span>
+  <video id="video" style="display:none" controls></video>
+  <script src="//cdn.jsdelivr.net/hls.js/latest/hls.min.js"></script>
+  <script src="twitch.js"></script>
+  <script src="playa.js"></script>
+</body>
