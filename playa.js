@@ -1,6 +1,7 @@
 (function (Twitch, Hls) {
 
   const video = document.getElementById('video')
+  const container = document.getElementById('container')
   let hls
 
   if (Hls.isSupported()) {
@@ -10,7 +11,7 @@
   }
 
   const loadStream = () => {
-    video.style.display = 'none'
+    container.style.display = 'none'
     document.getElementById('offline_warning').style.display = 'none'
 
     if (hls) {
@@ -24,12 +25,14 @@
     hls = new Hls()
     hls.attachMedia(video)
     hls.on(Hls.Events.MEDIA_ATTACHED, () => {
-      Twitch.getStreamUrl(document.getElementById('stream_name').value).
+      const stream = document.getElementById('stream_name').value
+      Twitch.getStreamUrl(stream).
         then((url) => {
           hls.loadSource(url)
           hls.on(Hls.Events.MANIFEST_PARSED, () => {
-            video.style.display = 'block'
+            container.style.display = 'block'
             video.play()
+            document.getElementById('chat_iframe').src = `https://www.twitch.tv/${stream}/chat`
           })
         }, () => {
           document.getElementById('offline_warning').style.display = 'block'
